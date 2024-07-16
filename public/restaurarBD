@@ -1,0 +1,139 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS fotografias;
+
+DROP TABLE IF EXISTS habitaciones;
+
+DROP TABLE IF EXISTS log;
+
+DROP TABLE IF EXISTS reservas;
+
+DROP TABLE IF EXISTS usuarios;
+
+CREATE TABLE `fotografias` (
+  `id_img` int NOT NULL AUTO_INCREMENT,
+  `id_habitacion` int NOT NULL,
+  `url` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  PRIMARY KEY (`id_img`),
+  KEY `id_habitacion` (`id_habitacion`),
+  CONSTRAINT `fotografias_ibfk_1` FOREIGN KEY (`id_habitacion`) REFERENCES `habitaciones` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+INSERT INTO fotografias VALUES('3', '3', '../public/images/habitaciones/105_svyhr.webp');
+INSERT INTO fotografias VALUES('5', '3', '../public/images/habitaciones/105_obldr.webp');
+INSERT INTO fotografias VALUES('6', '1', '../public/images/habitaciones/103_fubmh.webp');
+INSERT INTO fotografias VALUES('7', '2', '../public/images/habitaciones/104_bjcih.webp');
+INSERT INTO fotografias VALUES('8', '15', '../public/images/habitaciones/204_rsgoi.webp');
+INSERT INTO fotografias VALUES('9', '16', '../public/images/habitaciones/301_nfozl.webp');
+INSERT INTO fotografias VALUES('10', '17', '../public/images/habitaciones/302_wubhm.webp');
+INSERT INTO fotografias VALUES('11', '4', '../public/images/habitaciones/201_mojbe.webp');
+INSERT INTO fotografias VALUES('12', '19', '../public/images/habitaciones/Suite presidencial_itazv.webp');
+INSERT INTO fotografias VALUES('13', '13', '../public/images/habitaciones/202_plydf.webp');
+INSERT INTO fotografias VALUES('14', '20', '../public/images/habitaciones/Suite nupcial_oxbpu.webp');
+INSERT INTO fotografias VALUES('15', '14', '../public/images/habitaciones/203_webpn.webp');
+
+
+CREATE TABLE `habitaciones` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `numero_habitacion` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `capacidad` int NOT NULL,
+  `precio_noche` decimal(10,2) NOT NULL,
+  `descripcion` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `numero_habitacion` (`numero_habitacion`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+INSERT INTO habitaciones VALUES('1', '103', '2', '53.00', 'Nuestra elegante Habitación Doble está diseñada para ofrecer el máximo confort y una estancia placentera para dos personas. Decorada con un estilo moderno y acogedor, esta habitación proporciona un ambiente perfecto tanto para viajeros de negocios como para turistas.');
+INSERT INTO habitaciones VALUES('2', '104', '2', '35.00', 'La Habitación Doble en M&M Hotels es la elección perfecta para parejas o amigos que buscan una estancia confortable y elegante. Con un diseño contemporáneo y detalles cuidadosamente seleccionados, esta habitación ofrece un ambiente tranquilo y acogedor, ideal para relajarse después de un día explorando la ciudad o atendiendo compromisos de negocios.');
+INSERT INTO habitaciones VALUES('3', '105', '2', '45.00', 'La Habitación Doble Estándar en M&M Hotels es la opción ideal para quienes buscan comodidad y funcionalidad en un entorno acogedor. Perfecta para parejas o amigos, esta habitación combina un diseño elegante con todas las comodidades necesarias para una estancia relajante y placentera.');
+INSERT INTO habitaciones VALUES('4', '201', '3', '50.00', 'La Habitación Triple en M&M Hotels está diseñada para brindar comodidad y espacio a pequeños grupos o familias que viajan juntos. Con un diseño moderno y funcional, esta habitación es ideal para tres personas, ofreciendo todas las comodidades necesarias para una estancia relajante y agradable.');
+INSERT INTO habitaciones VALUES('5', '101', '2', '42.50', 'La Habitación Doble en M&M Hotels es el refugio perfecto para parejas o amigos que buscan una estancia cómoda y elegante. Con un diseño contemporáneo y atención a los detalles, esta habitación ofrece un ambiente acogedor y relajante, ideal para descansar después de un día de actividades o trabajo.');
+INSERT INTO habitaciones VALUES('6', '102', '2', '44.00', 'La Habitación Doble en H&H Hotels está diseñada para ofrecer una experiencia de alojamiento confortable y elegante. Ideal para parejas o dos personas que viajan juntas, esta habitación combina un diseño moderno con todas las comodidades necesarias para una estancia relajante y placentera.');
+INSERT INTO habitaciones VALUES('13', '202', '3', '60.00', 'Espaciosa y bien iluminada, esta habitación cuenta con tres cómodas camas individuales, ideal para familias o grupos de amigos. Decorada con un estilo contemporáneo, incluye un baño privado con ducha, televisión de pantalla plana y Wi-Fi gratuito para mantenerte conectado.');
+INSERT INTO habitaciones VALUES('14', '203', '3', '65.00', 'Diseñada para ofrecer comodidad y funcionalidad, esta habitación dispone de tres camas individuales y un área de estar con un pequeño sofá. El baño privado está equipado con artículos de tocador y secador de pelo, y la habitación también ofrece aire acondicionado y una mesa de trabajo para mayor conveniencia.');
+INSERT INTO habitaciones VALUES('15', '204', '3', '58.00', 'Con un diseño acogedor y moderno, esta habitación ofrece tres camas individuales y un amplio espacio para moverse cómodamente. Incluye un baño privado con ducha, televisión de pantalla plana, minibar y caja fuerte, asegurando una estancia confortable y segura para sus ocupantes.');
+INSERT INTO habitaciones VALUES('16', '301', '4', '85.00', 'Ideal para familias o grupos de amigos, esta amplia habitación cuenta con cuatro camas individuales y una decoración moderna y funcional. Incluye un baño privado con ducha, una televisión de pantalla plana, aire acondicionado y Wi-Fi gratuito para que todos los huéspedes disfruten de una estancia cómoda y conectada.');
+INSERT INTO habitaciones VALUES('17', '302', '4', '85.00', 'Con un ambiente acogedor y espacioso, esta habitación ofrece cuatro cómodas camas individuales y un área de estar para relajarse. El baño privado está equipado con todas las comodidades necesarias, incluyendo artículos de tocador y secador de pelo. Además, la habitación dispone de un escritorio, televisión por cable y minibar para una experiencia completa.');
+INSERT INTO habitaciones VALUES('19', 'Suite presidencial', '4', '540.00', 'La Suite Presidencial ofrece el máximo lujo y confort con una amplia sala de estar, comedor privado y una lujosa habitación con una cama king size. Decorada con elegancia, cuenta con un baño en suite de mármol con bañera de hidromasaje y ducha separada, además de artículos de tocador de alta gama. Las impresionantes vistas panorámicas, el servicio de mayordomo las 24 horas y las exclusivas amenidades, como minibar surtido y sistema de entretenimiento de última generación, aseguran una estancia inolvidable para los huéspedes más exigentes.');
+INSERT INTO habitaciones VALUES('20', 'Suite nupcial', '2', '199.00', 'Diseñada para crear recuerdos inolvidables, la Suite Nupcial ofrece un ambiente romántico y elegante con una espaciosa habitación que cuenta con una cama king size de lujo y una decoración exquisita. La suite incluye un baño en suite con bañera de hidromasaje, ducha de lluvia y artículos de tocador premium. Además, dispone de una sala de estar íntima, un balcón privado con vistas panorámicas y detalles especiales como pétalos de rosa y champán de cortesía, haciendo de esta suite el refugio perfecto para parejas en su noche de bodas.');
+
+
+CREATE TABLE `log` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `fecha_hora` datetime DEFAULT CURRENT_TIMESTAMP,
+  `descripcion` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=686 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+INSERT INTO log VALUES('672', '2024-06-07 18:32:56', 'Cierre de sesión: 90661935Y Cliente');
+INSERT INTO log VALUES('673', '2024-06-07 18:33:34', 'Inicio de sesión: 18856491X Recepcionista');
+INSERT INTO log VALUES('674', '2024-06-07 18:34:35', 'Se ha añadido una nueva imagen a la habitación con número 103');
+INSERT INTO log VALUES('675', '2024-06-07 18:34:45', 'Se ha añadido una nueva imagen a la habitación con número 104');
+INSERT INTO log VALUES('676', '2024-06-07 18:39:02', 'Se ha añadido una nueva imagen a la habitación con número 204');
+INSERT INTO log VALUES('677', '2024-06-07 18:39:47', 'Se ha añadido una nueva imagen a la habitación con número 301');
+INSERT INTO log VALUES('678', '2024-06-07 18:40:14', 'Se ha añadido una nueva imagen a la habitación con número 302');
+INSERT INTO log VALUES('679', '2024-06-07 18:43:12', 'Se ha añadido una nueva imagen a la habitación con número 201');
+INSERT INTO log VALUES('680', '2024-06-07 18:43:31', 'Se ha añadido una nueva imagen a la habitación con número Suite presidencial');
+INSERT INTO log VALUES('681', '2024-06-07 18:44:04', 'Se ha añadido una nueva imagen a la habitación con número 202');
+INSERT INTO log VALUES('682', '2024-06-07 18:44:17', 'Se ha añadido una nueva imagen a la habitación con número Suite nupcial');
+INSERT INTO log VALUES('683', '2024-06-07 18:44:35', 'Se ha añadido una nueva imagen a la habitación con número 203');
+INSERT INTO log VALUES('684', '2024-06-07 18:47:49', 'Cierre de sesión: 18856491X Recepcionista');
+INSERT INTO log VALUES('685', '2024-06-07 18:48:00', 'Inicio de sesión: 66370306B Administrador');
+
+
+CREATE TABLE `reservas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int NOT NULL,
+  `id_habitacion` int NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL,
+  `comentarios` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci,
+  `n_personas` int DEFAULT NULL,
+  `estado` enum('Pendiente','Confirmada','Mantenimiento') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT 'Pendiente',
+  `marca_tiempo` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `id_usuario` (`id_usuario`),
+  KEY `id_habitacion` (`id_habitacion`),
+  CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
+  CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`id_habitacion`) REFERENCES `habitaciones` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+INSERT INTO reservas VALUES('88', '34', '1', '2024-06-11', '2024-06-14', 'Con un perro y un gato', '2', 'Confirmada', '2024-06-06 19:31:45');
+INSERT INTO reservas VALUES('90', '3', '16', '2024-06-04', '2024-06-07', 'Mantenimiento - Pintar pared de blanco', '2', 'Mantenimiento', '2024-06-06 19:38:08');
+INSERT INTO reservas VALUES('91', '33', '4', '2024-06-10', '2024-06-15', 'Con mascotas grandes', '2', 'Confirmada', '2024-06-06 19:38:33');
+INSERT INTO reservas VALUES('92', '35', '4', '2024-06-04', '2024-06-08', 'Con vistas', '3', 'Confirmada', '2024-06-06 19:38:58');
+INSERT INTO reservas VALUES('93', '34', '1', '2024-06-04', '2024-06-07', 'Con terraza', '2', 'Confirmada', '2024-06-06 19:39:41');
+INSERT INTO reservas VALUES('94', '3', '3', '2024-06-11', '2024-06-14', 'Mantenimiento - Arreglar moqueta', '1', 'Mantenimiento', '2024-06-06 19:41:37');
+INSERT INTO reservas VALUES('111', '34', '2', '2024-06-10', '2024-06-13', '', '2', 'Confirmada', '2024-06-07 16:12:23');
+INSERT INTO reservas VALUES('113', '31', '1', '2024-06-19', '2024-06-21', '', '2', 'Confirmada', '2024-06-07 16:19:37');
+INSERT INTO reservas VALUES('114', '31', '4', '2024-06-18', '2024-06-20', '', '3', 'Confirmada', '2024-06-07 17:21:25');
+INSERT INTO reservas VALUES('116', '7', '13', '2024-06-12', '2024-06-16', 'Television', '3', 'Confirmada', '2024-06-07 17:25:08');
+INSERT INTO reservas VALUES('117', '7', '13', '2024-06-19', '2024-06-21', 'Moqueta', '3', 'Confirmada', '2024-06-07 17:38:29');
+
+
+CREATE TABLE `usuarios` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `apellidos` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `dni` char(9) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `clave` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `numero_tarjeta` char(16) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `rol` enum('Cliente','Recepcionista','Administrador') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `dni` (`dni`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+
+INSERT INTO usuarios VALUES('1', 'Tia', 'Rodriguez', '66370306B', 'tia@void.ugr.es', '$2y$10$A67xFtax9R21QRCK2uwXfu5kWxBKs3fZjQmgsWShrpchviw2WcyUy', '4749746000945127', 'Administrador');
+INSERT INTO usuarios VALUES('3', 'Director', 'Directorez', '18856491X', 'director@void.ugr.es', '$2y$10$OqmUXYNUJx94FzM76V4WPu54KTO14E/7/JN6XBTpMcDsfD7VDz7ly', '4344556253595118', 'Recepcionista');
+INSERT INTO usuarios VALUES('7', 'Mortadelo', 'Mortadelez', '90661935Y', 'mortadelo@void.ugr.es', '$2y$10$YRwt/GXrmvv1vtidS97.4ez4f02ESBcu9XW/jvnFy/C9dBLjR5ecq', '4776651547221915', 'Cliente');
+INSERT INTO usuarios VALUES('18', 'Bacterio', 'Bacteriez', '00292983D', 'bacterio@void.ugr.es', '$2y$10$hwQvN0ZY3nycZ7QfS/ueS./035OIQP1W1i6sEHx3lD5JTfs0WaxPe', '4086203689520237', 'Cliente');
+INSERT INTO usuarios VALUES('31', 'Abuela', 'Abuelez', '48385845D', 'abuela@void.ugr.es', '$2y$10$jJ.jGaSWqr.0INrs6uiIVe4BkJadoMMuoivRPVgaGx5.1E7HepGwy', '4858062450651661', 'Administrador');
+INSERT INTO usuarios VALUES('32', 'ElSuper', 'Superez', '50534662M', 'elsuper@void.ugr.es', '$2y$10$R96X.cBOq0H7QmRh7D/K1.TIQJi2qUiMf1Ps32lgcbW9qPMqRZNDS', '4858062450651661', 'Recepcionista');
+INSERT INTO usuarios VALUES('33', 'Filemon', 'Filemonez', '05550896F', 'filemon@void.ugr.es', '$2y$10$ZC55GvOckRYp9J4OK.uCZe2J6stdkkpWMaszfcyrPqmzc4FGKI2ca', '4559996898726431', 'Cliente');
+INSERT INTO usuarios VALUES('34', 'Ofelia', 'Ofeliez', '72860462G', 'ofelia@void.ugr.es', '$2y$10$I2jvjGzHCSsFQmocg1FBd.E9kaAL53WHoUcYCAWbsS9oD.NoQJtum', '4226868704687466', 'Cliente');
+INSERT INTO usuarios VALUES('35', 'Irma', 'Irmez', '93502834Z', 'irma@void.ugr.es', '$2y$10$lboBqOM/BHdEWOHvpyKP8upWjr/qQnp1ywO0kI7oNuV1qHuD4/eKu', '4099023909534790', 'Cliente');
+
+
+SET FOREIGN_KEY_CHECKS = 1;
